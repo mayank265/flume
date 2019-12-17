@@ -5,9 +5,9 @@ import numpy as np
 
 import csv, xlwt, time, timeit
 
-import acceleration_module_only_defs as z_acceleration_module
-import correlation_module_only_defs as z_correlation_module
-import snr_module_only_defs as z_snr_module
+import acceleration_module as z_acceleration_module
+import correlation_module as z_correlation_module
+import snr_module as z_snr_module
 
 import datetime
 
@@ -155,9 +155,9 @@ def main():
         
 
 
-        import parameters_ems
+        import parameters_module
         print(os.getcwd())
-        import file_mover
+        import file_mover_module
 
         time_elapsed = datetime.datetime.now() - start_time
 

@@ -3,7 +3,7 @@ import numpy as np
 import csv, xlwt, time, timeit
 from xlrd import open_workbook
 import logging
-import octant_ems_only_defs as z_octant_module
+import octant_module as z_octant_module
 from scipy.stats import skew
 from scipy.stats import kurtosis
 

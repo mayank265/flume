@@ -25,6 +25,7 @@ def rounding(value):
     return round(value, 10)
 
 shear_velocity = float(input("Enter the value of Shear Velocity: "))
+flow_depth = float(input("Enter the value of Flow Depth: "))
 os.system('dir /b *Filtered_by_ALL*.dat > dat_files_list.txt')
 p = 20
 
@@ -120,7 +121,7 @@ try:
             #shear_velocity = 2.6
             multiplying_factor_2d = 0.75
             multiplying_factor_3d = 0.5
-            flow_depth = 14
+#            flow_depth = 14
             kinematic_viscosity = 0.000000850488830581204
 
             all_quadrant = 0
@@ -321,8 +322,8 @@ try:
             M21 = m21 / total_rows
             M12 = m12 / total_rows
 
-            
-            
+
+
             t, u, v, w = np.loadtxt(octant_file_name, dtype=float, delimiter=',',
                                     skiprows=2,
                                     usecols=(0, 1, 2, 3),
@@ -347,11 +348,11 @@ try:
             print("V_var: %0.10f" % (V_variance))
             print("W_var: %0.10f" % (W_variance))
 
-            
+
             print("Skewness U Prime",precision(skewness_U_prime))
             print("Skewness U Prime",precision(skewness_V_prime))
             print("Skewness U Prime",precision(skewness_W_prime))
-            
+
             print("Kurtosis U Prime",precision(kurtosis_U_prime))
             print("Kurtosis V Prime",precision(kurtosis_V_prime))
             print("Kurtosis W Prime",precision(kurtosis_W_prime))

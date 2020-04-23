@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 start_time_overall = time.time()
 
-for i in range (53,112,2):
+for i in range (1,112,2):
 	M = i
 
 	start_time = time.time()

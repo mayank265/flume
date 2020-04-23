@@ -3,12 +3,13 @@
 import csv, datetime, os, sys, glob
 import numpy as np
 
-import csv, xlwt, time, timeit
+import csv, xlwt, time, timeit, math
 
 import acceleration_module as z_acceleration_module
 import correlation_module as z_correlation_module
 import snr_module as z_snr_module
-
+import itertools
+import matplotlib.pyplot as plt
 import datetime
 
 
@@ -138,7 +139,7 @@ def main():
             input("Enter the threshold for SNR (default 15). Press Enter to accept default : ") or "15")
         threshold_acc = float(
             input("Enter the threshold for ACC thresholding (default 1 [implies 1g]). Press Enter to accept default : ") or "1")
-                    
+
         # shear_velocity = float(
         #     input("Enter the value of Shear Velocity: "))
         # shear_velocity = float(input("Enter the value of Shear Velocity: "))
@@ -152,7 +153,7 @@ def main():
 
 
         print("Calculating Parameters . ..  ")
-        
+
 
 
         import parameters_module

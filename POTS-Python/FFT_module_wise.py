@@ -3,15 +3,22 @@ import matplotlib.pyplot as plt
 from scipy.fftpack import fft, ifft
 import pandas as pd
 import csv
-
+import os
 
 def fft_module_individual(filename_read, column_header, color_choice):
     header = ['Freq', 'Amplitude']
     # filename_read = 'FFT_sample.csv'
     # column_header = 'u'
     # color_choice='red'
-    data_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Data.csv'
-    image_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Spectra.jpg'
+    print("filename_read in FFT module",filename_read)
+    (filename_without_extension, ext) = os.path.splitext(filename_read)
+    print(filename_without_extension)
+
+    data_filename_write = filename_without_extension + '_Column_Header_' + column_header + '_FFT_Data.csv'
+    image_filename_write = filename_without_extension + '_Column_Header_' + column_header + '_FFT_Spectra.jpg'
+    #
+    # data_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Data.csv'
+    # image_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Spectra.jpg'
 
     df = pd.read_csv(filename_read)
     df.dropna(inplace=True)
@@ -51,7 +58,8 @@ def fft_module_individual(filename_read, column_header, color_choice):
         writer.writerows(zip(xf, my_list))
 
     plt.clf()
-    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color=color_choice)
+    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color=color_choice,label=str(column_header)+' Amplitude')
+    plt.legend()
     plt.grid()
     plt.xlabel('Frequency')
     plt.ylabel('Peaks')
@@ -59,23 +67,20 @@ def fft_module_individual(filename_read, column_header, color_choice):
     # plt.show()
     plt.clf()
 
-filename_read = 'FFT_sample.csv'
-column_header = ['u', 'v', 'w']
-colors = ["red", "green", "blue"]
-for i, j in zip(column_header, colors):
-    fft_module_individual(filename_read, i, j)
-#
-
-def make_arrays():
-    pass
-
 def fft_module_merged(filename_read, column_header, color_choice):
-    header = ['Freq', 'Amplitude']
-    filename_read = 'FFT_sample.csv'
-    column_header = 'u'
-    color_choice='red'
-    data_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Data.csv'
-    image_filename_write = filename_read.split('.')[0] + '_Column_Header_' + column_header + '_FFT_Spectra_Merged.jpg'
+    print("In FFT Merged Module")
+    header = ['Freq', 'Amplitude_U', 'Amplitude_V', 'Amplitude_W']
+    # filename_read = 'FFT_sample.csv'
+    # column_header = 'u'
+    # color_choice='red'
+
+    print("filename_read in FFT module",filename_read)
+    (filename_without_extension, ext) = os.path.splitext(filename_read)
+    print(filename_without_extension)
+
+    data_filename_write = filename_without_extension + '_Column_Header_uvw'  +  '_FFT_Data_Merged.csv'
+    image_filename_write = filename_without_extension + '_Column_Header_uvw'   + '_FFT_Spectra_Merged.jpg'
+
     df = pd.read_csv(filename_read)
     df.dropna(inplace=True)
 
@@ -121,27 +126,36 @@ def fft_module_merged(filename_read, column_header, color_choice):
     yf = fft(y)
     xf = np.linspace(0.0, 1.0 / (2 * T), N // 2)  # 0, ,10
     my_list = 2.0 / N * np.abs(yf[0:N // 2])
-    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="r")
+    my_list_u = my_list
+    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="r", label='u Amplitude')
+    plt.legend()
 
     y = slice_of_input_array_for_processing_FFT_V
     ####### processs via window  y = windowing(y)
     yf = fft(y)
-    xf = np.linspace(0.0, 1.0 / (2 * T), N // 2)  # 0, ,10
     my_list = 2.0 / N * np.abs(yf[0:N // 2])
-    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="g")
+    my_list_v = my_list
+    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="g", label='v Amplitude')
+    plt.legend()
 
     y = slice_of_input_array_for_processing_FFT_W
     ####### processs via window  y = windowing(y)
     yf = fft(y)
-    xf = np.linspace(0.0, 1.0 / (2 * T), N // 2)  # 0, ,10
     my_list = 2.0 / N * np.abs(yf[0:N // 2])
-    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="b")
+    my_list_w = my_list
+    plt.loglog(xf, 2.0 / N * np.abs(yf[0:N // 2]), color="b", label='w Amplitude')
+    plt.legend()
 
     plt.grid()
     plt.xlabel('Frequency')
     plt.ylabel('Peaks')
     plt.savefig(image_filename_write)
+    with open(data_filename_write, 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(i for i in header)
+        writer.writerows(zip(xf, my_list_u, my_list_v, my_list_w ))
+
     # plt.show()
 
 
-fft_module_merged(filename_read, column_header, colors)
+# fft_module_merged(filename_read, column_header, colors)

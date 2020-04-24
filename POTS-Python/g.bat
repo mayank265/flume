@@ -1,1 +1,1 @@
-git add . && git commit -m "FFT Merged" && git push
+git add . && git commit -m "FFT Merged with Label" && git push

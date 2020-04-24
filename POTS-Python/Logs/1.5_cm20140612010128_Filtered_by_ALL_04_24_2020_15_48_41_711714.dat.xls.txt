@@ -1,0 +1,11 @@
+2020-04-24 16:08:14,334 - 1.5_cm20140612010128_Filtered_by_ALL_04_24_2020_15_48_41_711714.dat.xls - ERROR - 1.5_cm20140612010128_Filtered_by_ALL_04_24_2020_15_48_41_711714.dat not found.
+Traceback (most recent call last):
+  File "D:\IITP\Research\Papers Submitted\POT-Python\Measurement_2_separated_figs\flume\POTS-Python\parameters_module.py", line 330, in <module>
+    unpack=True)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\numpy\lib\npyio.py", line 955, in loadtxt
+    fh = np.lib._datasource.open(fname, 'rt', encoding=encoding)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\numpy\lib\_datasource.py", line 266, in open
+    return ds.open(path, mode, encoding=encoding, newline=newline)
+  File "C:\ProgramData\Anaconda3\lib\site-packages\numpy\lib\_datasource.py", line 624, in open
+    raise IOError("%s not found." % path)
+OSError: 1.5_cm20140612010128_Filtered_by_ALL_04_24_2020_15_48_41_711714.dat not found.

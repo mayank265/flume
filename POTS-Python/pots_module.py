@@ -8,6 +8,7 @@ import csv, xlwt, time, timeit, math
 import acceleration_module as z_acceleration_module
 import correlation_module as z_correlation_module
 import snr_module as z_snr_module
+import FFT_module_wise as z_fft_module
 import itertools
 import matplotlib.pyplot as plt
 import datetime
@@ -68,6 +69,17 @@ def full_write_files(filtering_method_name, t, u, v, w, backup_u, backup_v, back
         writer.writerows(zip(t, u, v, w, backup_u, backup_v, backup_w,  snr_u, snr_v, snr_w, cor_u, cor_v, cor_w))
 
     print("File written : ",filename)
+    print("Computing FFTs")
+
+    column_header = ['u', 'v', 'w']
+    colors = ["red", "green", "blue"]
+    for i, j in zip(column_header, colors):
+        z_fft_module.fft_module_individual(filename, i, j)
+
+    z_fft_module.fft_module_merged(filename, column_header[0], colors[0])
+
+
+
 
 def process_input_files(input_filename,threshold_correlation=70,threshold_snr=15,threshold_acc=1):
     input_filename = input_filename
@@ -132,13 +144,13 @@ def main():
         threshold_snr = 15
         threshold_acc = 1
         # shear_velocity=2.6
-
-        threshold_correlation = float(
-            input("Enter the threshold for Correlation (default 70). Press Enter to accept default : ") or "70")
-        threshold_snr = float(
-            input("Enter the threshold for SNR (default 15). Press Enter to accept default : ") or "15")
-        threshold_acc = float(
-            input("Enter the threshold for ACC thresholding (default 1 [implies 1g]). Press Enter to accept default : ") or "1")
+        #
+        # threshold_correlation = float(
+        #     input("Enter the threshold for Correlation (default 70). Press Enter to accept default : ") or "70")
+        # threshold_snr = float(
+        #     input("Enter the threshold for SNR (default 15). Press Enter to accept default : ") or "15")
+        # threshold_acc = float(
+        #     input("Enter the threshold for ACC thresholding (default 1 [implies 1g]). Press Enter to accept default : ") or "1")
 
         # shear_velocity = float(
         #     input("Enter the value of Shear Velocity: "))

@@ -27,14 +27,14 @@ def fft_module_individual(filename_read, column_header, color_choice):
     column_to_numpy_array = np.asarray(u_list)
     slice_of_input_array_for_processing_FFT = []
 
-    # percentage = float(
-    #     input(
-    #         "Enter the % number of samples for FFT Calculation (default 10 percent). Press Enter to accept default : ") or "10")
-    #
-    # frequency = int(input("Enter the sampling frequency: "))
+    percentage = float(
+        input(
+            "Enter the % number of samples for FFT Calculation (default 10 percent). Press Enter to accept default : ") or "10")
 
-    percentage = 10
-    frequency = 100
+    frequency = int(input("Enter the sampling frequency: "))
+
+    # percentage = 10
+    # frequency = 100
 
     N = int(len(u_list) * (percentage / 100))
 

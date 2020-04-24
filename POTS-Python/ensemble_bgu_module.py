@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 start_time_overall = time.time()
 
-for i in range (1,112,2):
+for i in range(1,112,2):
 	M = i
 
 	start_time = time.time()
@@ -82,7 +82,7 @@ for i in range (1,112,2):
 
 		return U_avg,V_avg,W_avg
 
-	input_filename = "sample.csv"
+	input_filename = "1.5_cm20140612010128_Filtered_by_ALL_04_24_2020_17_07_26_228922.csv"
 	output_filename = str(input_filename.split('.')[0])+"_M_"+str(M)+"_"+"Component_"+str((M-1)/2)+".xls"
 
 	Timezero, U,V,W  = np.loadtxt(input_filename,dtype=float,delimiter=',',skiprows=1,usecols=(0,1,2,3), unpack=True) #np.loadtxt(c, delimiter=',', usecols=(0, 2), unpack=True)
@@ -149,7 +149,7 @@ for i in range (1,112,2):
 	# savefig('foo.png', bbox_inches='tight')
 	# savefig('foo.png', bbox_inches='tight')
 
-	plt.show(block = True)
+	# plt.show(block = True)
 
 	Timezero = Timezero.tolist()
 	Timezero.insert(0, "Timezero")
@@ -163,9 +163,48 @@ for i in range (1,112,2):
 	W = W.tolist()
 	W.insert(0, "W")
 
+
+
 	U_avg.insert(0, "U_avg")
 	V_avg.insert(0, "V_avg")
 	W_avg.insert(0, "W_avg")
+
+	import numpy as np
+	import matplotlib.pyplot as plt
+
+	fig, axs = plt.subplots(2, 3, sharex=True, sharey=True)
+	# z='red'
+	# marker symbol
+	print(Timezero[:5], type(Timezero))
+	axs[0, 0].scatter(Timezero[1:], U[1:], s=2, c='r', marker=">")
+	axs[0, 0].set_title("RAW U Velocities")
+
+	# marker from TeX
+	axs[0, 1].scatter(Timezero[1:], V[1:], s=2, c='g', marker=r'$\alpha$')
+	axs[0, 1].set_title("RAW V Velocities")
+
+	# marker from path
+	# verts = [[-1, -1], [1, -1], [1, 1], [-1, -1]]
+	axs[0, 2].scatter(Timezero[1:], W[1:], s=2, c='b', marker=r'$\alpha$')
+	axs[0, 2].set_title("RAW W Velocities")
+
+	# regular polygon marker
+	axs[1, 0].scatter(Timezero[1:], U_avg[1:], s=2, c='r', marker=(5, 0))
+	axs[1, 0].set_title("Fourier Averaged \n U Velocities k= {}".format(M))
+
+	# regular star marker
+	axs[1, 1].scatter(Timezero[1:], V_avg[1:], s=2, c='g', marker=(5, 1))
+	axs[1, 1].set_title("Fourier Averaged \n V Velocities k= {}".format(M))
+
+	# regular asterisk marker
+	axs[1, 2].scatter(Timezero[1:], W_avg[1:], s=2, c='b', marker=(5, 2))
+	axs[1, 2].set_title("Fourier Averaged \n W Velocities k= {}".format(M))
+
+	plt.tight_layout()
+	plt.savefig(output_filename+".jpg")
+	# plt.show()
+	plt.clf()
+
 	U_prime.insert(0, "u'")
 	V_prime.insert(0, "v'")
 	W_prime.insert(0, "w'")

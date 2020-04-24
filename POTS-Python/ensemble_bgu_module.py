@@ -83,7 +83,7 @@ for i in range(1,112,2):
 		return U_avg,V_avg,W_avg
 
 	input_filename = "1.5_cm20140612010128_Filtered_by_ALL_04_24_2020_17_07_26_228922.csv"
-	output_filename = str(input_filename.split('.')[0])+"_M_"+str(M)+"_"+"Component_"+str((M-1)/2)+".xls"
+	output_filename = str(input_filename.split('.')[0])+"_k_"+str(M)+"_"+"Component_"+str((M-1)/2)+".xls"
 
 	Timezero, U,V,W  = np.loadtxt(input_filename,dtype=float,delimiter=',',skiprows=1,usecols=(0,1,2,3), unpack=True) #np.loadtxt(c, delimiter=',', usecols=(0, 2), unpack=True)
 	total_rows = min(len(U),len(V),len(W),len(Timezero))

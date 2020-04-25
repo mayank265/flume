@@ -1,0 +1,2 @@
+copy "C:\Users\Mayank\Desktop\tmp\1.5_cm20140612010128.dat" "D:\IITP\Research\Papers Submitted\POT-Python\Measurement_2_separated_figs\flume\POTS-Python" /y
+copy "C:\Users\Mayank\Desktop\tmp\1_cm20140612005538.dat" "D:\IITP\Research\Papers Submitted\POT-Python\Measurement_2_separated_figs\flume\POTS-Python" /y

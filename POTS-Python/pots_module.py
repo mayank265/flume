@@ -8,7 +8,7 @@ import csv, xlwt, time, timeit, math
 import acceleration_module as z_acceleration_module
 import correlation_module as z_correlation_module
 import snr_module as z_snr_module
-import FFT_module_wise as z_fft_module
+import FFT_module as z_fft_module
 import itertools
 import matplotlib.pyplot as plt
 import datetime
@@ -140,17 +140,17 @@ def main():
         # from datetime import datetime
         start_time = datetime.datetime.now()
 
-        threshold_correlation = 70
-        threshold_snr = 15
-        threshold_acc = 1
+        # threshold_correlation = 70
+        # threshold_snr = 15
+        # threshold_acc = 1
         # shear_velocity=2.6
-        #
-        # threshold_correlation = float(
-        #     input("Enter the threshold for Correlation (default 70). Press Enter to accept default : ") or "70")
-        # threshold_snr = float(
-        #     input("Enter the threshold for SNR (default 15). Press Enter to accept default : ") or "15")
-        # threshold_acc = float(
-        #     input("Enter the threshold for ACC thresholding (default 1 [implies 1g]). Press Enter to accept default : ") or "1")
+
+        threshold_correlation = float(
+            input("Enter the threshold for Correlation (default 70). Press Enter to accept default : ") or "70")
+        threshold_snr = float(
+            input("Enter the threshold for SNR (default 15). Press Enter to accept default : ") or "15")
+        threshold_acc = float(
+            input("Enter the threshold for ACC thresholding (default 1 [implies 1g]). Press Enter to accept default : ") or "1")
 
         # shear_velocity = float(
         #     input("Enter the value of Shear Velocity: "))

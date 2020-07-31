@@ -1,1 +1,1 @@
-git add . && git commit -m "Spectra_paper_windowing_code" && git push
+git add . && git commit -m "Moved Spectra_paper_windowing_code. Only POTS Now" && git push
